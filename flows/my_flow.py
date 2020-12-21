@@ -1,6 +1,7 @@
 # flows/my_flow.py
 
 from prefect import task, Flow
+from prefect.executors.dask import DaskExecutor
 from prefect.storage import GitHub
 
 @task
@@ -20,5 +21,4 @@ flow.storage = GitHub(
     path="flows/my_flow.py",       # location of flow file in repo
     ref="main"
 )
- 
-      
+flow.executor = DaskExecutor("tcp://dask-scheduler:8786")      
