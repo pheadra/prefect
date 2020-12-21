@@ -3,7 +3,7 @@
 from prefect import task, Flow
 from prefect.executors.dask import DaskExecutor
 from prefect.storage import GitHub
-from prefect.environments import DaskKubernetesEnvironment
+from prefect.environments.execution.remote import RemoteEnvironment
 
 @task
 def get_data():
@@ -13,8 +13,7 @@ def get_data():
 def print_data(data):
     print(data)
 
-env = DaskKubernetesEnvironment()
-with Flow("file-based-flow", environment=env) as flow:
+with Flow("file-based-flow", executor=DaskExecutor("tcp://dask-scheduler:8786")) as flow:
     data = get_data()
     print_data(data)
 
