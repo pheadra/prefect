@@ -3,6 +3,7 @@
 from prefect import task, Flow
 from prefect.executors.dask import DaskExecutor
 from prefect.storage import GitHub
+from prefect.run_configs import KubernetesRun
 
 @task
 def get_data():
@@ -21,4 +22,5 @@ flow.storage = GitHub(
     path="flows/my_flow.py",       # location of flow file in repo
     ref="main"
 )
+flow.run_config = KubernetesRun()
 flow.executor = DaskExecutor("tcp://dask-scheduler:8786")      
