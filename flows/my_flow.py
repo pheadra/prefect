@@ -1,7 +1,10 @@
 # flows/my_flow.py
 
-from prefect import task, Flow
+from prefect import task, Flow, context
 from prefect.storage import GitHub
+
+context.setdefault("secrets", {}) # to make sure context has a secrets attribute
+context.secrets["GITHUB_ACCESS_TOKEN"] = "fcfd03a0197716a596505b12d315e097775e2bf9"
 
 @task
 def get_data():
