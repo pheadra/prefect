@@ -3,7 +3,7 @@
 from prefect import task, Flow
 from prefect.executors.dask import DaskExecutor
 from prefect.storage import GitHub
-from prefect.run_configs import KubernetesRun
+from prefect.run_configs import UniversalRun
 
 @task
 def get_data():
@@ -18,7 +18,7 @@ with Flow("file-based-flow") as flow:
     print_data(data)
 
 
-flow.run_config = KubernetesRun()
+flow.run_config = UniversalRun()
 flow.executor = DaskExecutor("tcp://dask-scheduler:8786")
 flow.storage = GitHub(
     repo="pheadra/prefect",                 # name of repo
