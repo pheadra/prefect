@@ -18,6 +18,7 @@ with Flow("file-based-flow") as flow:
 flow.storage = GitHub(
     repo="pheadra/prefect",                 # name of repo
     path="flows/my_flow.py"       # location of flow file in repo
+    ref="main"
 )
  
       
