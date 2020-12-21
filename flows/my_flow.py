@@ -18,7 +18,7 @@ with Flow("file-based-flow") as flow:
 flow.storage = GitHub(
     repo="pheadra/prefect",                 # name of repo
     path="flows/my_flow.py",        # location of flow file in repo
-    secrets=["d770e6ba2de8df0777df22d935a0a13aaa9ea0ed"]  # name of personal access token secret
+    secrets=["be9fcd2c1279026de314a7ed16e05436df49cb78"]  # name of personal access token secret
 )
  
       
