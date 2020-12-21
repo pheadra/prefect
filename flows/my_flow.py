@@ -18,10 +18,11 @@ with Flow("file-based-flow") as flow:
     print_data(data)
 
 
-flow.executor = DaskExecutor("tcp://dask-scheduler:8786")
 flow.run_config = KubernetesRun()
 flow.storage = GitHub(
     repo="pheadra/prefect",                 # name of repo
     path="flows/my_flow.py",       # location of flow file in repo
     ref="main"
 )
+executor = DaskExecutor("tcp://dask-scheduler:8786")
+flow.run(executor=executor)
